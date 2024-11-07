@@ -29,7 +29,7 @@ The polar format resembles the anvil format in many ways, though it is binary, n
 | Chunk X                  | varint                               |                                                                                      |
 | Chunk Z                  | varint                               |                                                                                      |
 | Sections                 | array[[section](#section)]           | `maxSection - minSection + 1` entries                                                |
-| Entities                 | array[[entity](#entity)]             |                                                                                      | 
+| Entities                 | array[[entity](#entity)]             | `maxSection - minSection + 1` entries                                                | 
 | Number of Block Entities | varint                               | Number of entries in the following array                                             |
 | Block Entities           | array[[block entity](#block-entity)] |                                                                                      |
 | Heightmap Mask           | int                                  | A mask indicating which heightmaps are present. See `AnvilChunk` for flag constants. |
