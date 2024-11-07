@@ -1,7 +1,11 @@
-package net.hollowcube.polar;
+package net.hollowcube.polar.io;
 
 import com.github.luben.zstd.Zstd;
-import net.hollowcube.polar.PolarSection.LightContent;
+import net.hollowcube.polar.*;
+import net.hollowcube.polar.chunk.PolarChunk;
+import net.hollowcube.polar.chunk.PolarSection;
+import net.hollowcube.polar.chunk.PolarSection.LightContent;
+import net.hollowcube.polar.chunk.PolarWorld;
 import net.kyori.adventure.nbt.BinaryTag;
 import net.kyori.adventure.nbt.CompoundBinaryTag;
 import net.minestom.server.coordinate.CoordConversion;

@@ -1,5 +1,6 @@
 package net.hollowcube.polar;
 
+import net.hollowcube.polar.chunk.PolarWorld;
 import net.kyori.adventure.nbt.CompoundBinaryTag;
 import net.minestom.server.MinecraftServer;
 import org.jetbrains.annotations.NotNull;

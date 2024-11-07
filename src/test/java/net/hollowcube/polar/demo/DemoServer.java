@@ -1,8 +1,8 @@
 package net.hollowcube.polar.demo;
 
-import net.hollowcube.polar.PolarLoader;
-import net.hollowcube.polar.PolarWorld;
-import net.hollowcube.polar.PolarWriter;
+import net.hollowcube.polar.io.PolarLoader;
+import net.hollowcube.polar.chunk.PolarWorld;
+import net.hollowcube.polar.io.PolarWriter;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.builder.Command;
 import net.minestom.server.coordinate.Pos;

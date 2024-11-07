@@ -1,5 +1,7 @@
-package net.hollowcube.polar;
+package net.hollowcube.polar.io;
 
+import net.hollowcube.polar.chunk.ChunkSelector;
+import net.hollowcube.polar.chunk.PolarWorld;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.instance.Chunk;
 import net.minestom.server.instance.Instance;

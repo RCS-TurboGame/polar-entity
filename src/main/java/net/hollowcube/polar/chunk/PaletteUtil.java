@@ -1,4 +1,4 @@
-package net.hollowcube.polar;
+package net.hollowcube.polar.chunk;
 
 import net.minestom.server.utils.validate.Check;
 

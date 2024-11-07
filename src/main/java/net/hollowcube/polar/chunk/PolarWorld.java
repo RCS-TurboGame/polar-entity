@@ -1,4 +1,4 @@
-package net.hollowcube.polar;
+package net.hollowcube.polar.chunk;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;

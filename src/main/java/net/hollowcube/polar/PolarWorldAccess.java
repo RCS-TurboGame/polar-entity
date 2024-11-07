@@ -1,5 +1,6 @@
 package net.hollowcube.polar;
 
+import net.hollowcube.polar.io.PolarLoader;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.instance.Chunk;
 import net.minestom.server.instance.Instance;
