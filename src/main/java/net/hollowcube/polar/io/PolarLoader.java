@@ -2,12 +2,12 @@ package net.hollowcube.polar.io;
 
 import it.unimi.dsi.fastutil.shorts.Short2ObjectMap;
 import it.unimi.dsi.fastutil.shorts.Short2ObjectOpenHashMap;
+import net.hollowcube.polar.PolarWorldAccess;
 import net.hollowcube.polar.chunk.PolarChunk;
 import net.hollowcube.polar.chunk.PolarEntity;
 import net.hollowcube.polar.chunk.PolarSection;
 import net.hollowcube.polar.chunk.PolarSection.LightContent;
 import net.hollowcube.polar.chunk.PolarWorld;
-import net.hollowcube.polar.PolarWorldAccess;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.builder.arguments.minecraft.ArgumentBlockState;
 import net.minestom.server.command.builder.exception.ArgumentSyntaxException;

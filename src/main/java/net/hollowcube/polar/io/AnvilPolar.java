@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class AnvilPolar {
-
     /**
      * Convert the anvil world at the given path to a Polar world. The world height range (in sections) is assumed
      * to be from -4 to 19 (inclusive), which is the default for recent Minecraft versions.
@@ -84,6 +83,8 @@ public class AnvilPolar {
         final AnvilLoader anvilLoader = new AnvilLoader(path);
 
         var anvilChunks = new ArrayList<Chunk>();
+        var entityNBT = new ArrayList<EntityNBTFile>();
+
         try (var files = Files.walk(path.resolve("region"), 1)) {
             for (var regionFile : files.toList()) {
                 if (!regionFile.getFileName().toString().endsWith(".mca")) continue;
@@ -93,6 +94,7 @@ public class AnvilPolar {
                 var regionZ = Integer.parseInt(nameParts[2]);
 
                 anvilChunks.addAll(readAnvilChunks(instance, anvilLoader, regionX, regionZ, minSection, maxSection, selector));
+                entityNBT.addAll(readEntityFiles(regionX, regionZ, path));
             }
         }
 
@@ -112,6 +114,7 @@ public class AnvilPolar {
 
     private static @NotNull List<Chunk> readAnvilChunks(@NotNull Instance instance, @NotNull AnvilLoader anvilLoader, int regionX, int regionZ, int minSection, int maxSection, @NotNull ChunkSelector selector) throws IOException {
         var chunks = new ArrayList<Chunk>();
+
         for (int x = 0; x < 32; x++) {
             for (int z = 0; z < 32; z++) {
                 int chunkX = x + (regionX * 32);
@@ -125,7 +128,35 @@ public class AnvilPolar {
                 chunks.add(chunk);
             }
         }
+
         return chunks;
+    }
+
+    private static @NotNull List<EntityNBTFile> readEntityFiles(int regionX, int regionZ, @NotNull Path path) throws IOException {
+        var entities = new ArrayList<EntityNBTFile>();
+        var basePath = path.resolve("entities");
+
+        for (int x = 0; x < 32; x++) {
+            for (int z = 0; z < 32; z++) {
+                int chunkX = x + (regionX * 32);
+                int chunkZ = z + (regionZ * 32);
+
+                var regionPath = basePath.resolve("r." + regionX + "." + regionZ + ".mca");
+
+                if (Files.size(regionPath) == 0) continue;
+
+                //
+                // TODO: Read Entity MCA File
+                //
+
+                entities.add(new EntityNBTFile(chunkX, chunkZ));
+            }
+
+        }
+        return entities;
+    }
+
+    public record EntityNBTFile(int chunkX, int chunkZ) {
     }
 
 }
