@@ -41,7 +41,8 @@ import static net.minestom.server.instance.Chunk.CHUNK_SECTION_SIZE;
 
 @SuppressWarnings("UnstableApiUsage")
 public class PolarLoader implements IChunkLoader {
-    static final Logger logger = LoggerFactory.getLogger(PolarLoader.class);
+    public static final Logger logger = LoggerFactory.getLogger(PolarLoader.class);
+
     private static final BlockManager BLOCK_MANAGER = MinecraftServer.getBlockManager();
     private static final DynamicRegistry<Biome> BIOME_REGISTRY = MinecraftServer.getBiomeRegistry();
     private static final ExceptionManager EXCEPTION_HANDLER = MinecraftServer.getExceptionManager();

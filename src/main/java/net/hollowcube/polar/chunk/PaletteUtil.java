@@ -2,7 +2,7 @@ package net.hollowcube.polar.chunk;
 
 import net.minestom.server.utils.validate.Check;
 
-final class PaletteUtil {
+public final class PaletteUtil {
     private PaletteUtil() {}
 
     public static int bitsToRepresent(int n) {

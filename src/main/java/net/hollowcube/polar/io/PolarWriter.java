@@ -2,6 +2,7 @@ package net.hollowcube.polar.io;
 
 import com.github.luben.zstd.Zstd;
 import net.hollowcube.polar.*;
+import net.hollowcube.polar.chunk.PaletteUtil;
 import net.hollowcube.polar.chunk.PolarChunk;
 import net.hollowcube.polar.chunk.PolarSection;
 import net.hollowcube.polar.chunk.PolarWorld;
