@@ -25,6 +25,7 @@ public class PolarEntity {
 
     private final UUID uuid;
     private final String type;
+    private final int passengerCount;
     private final PolarEntity @NotNull [] passengers;
     private final BinaryTag data;
 
@@ -34,6 +35,7 @@ public class PolarEntity {
         this.rotation = new float[0];
         this.uuid = new UUID(0,0);
         this.type = "minecraft:zombie";
+        this.passengerCount = 0;
         this.passengers = new PolarEntity[0];
         this.data = null;
     }
@@ -48,6 +50,7 @@ public class PolarEntity {
         this.rotation = rotation;
         this.uuid = uuid;
         this.type = type;
+        this.passengerCount = passengers.length;
         this.passengers = passengers;
         this.data = data;
     }
@@ -70,6 +73,10 @@ public class PolarEntity {
 
     public UUID getUuid() {
         return uuid;
+    }
+
+    public int getPassengerCount() {
+        return passengerCount;
     }
 
     public PolarEntity[] getPassengers() {

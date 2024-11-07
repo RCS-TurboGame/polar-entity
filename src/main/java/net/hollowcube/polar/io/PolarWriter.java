@@ -111,11 +111,10 @@ public class PolarWriter {
         buffer.write(UUID, entity.getUuid());
         buffer.write(STRING, entity.getType());
 
-        buffer.write(BYTE_ARRAY, NetworkBuffer.makeArray(buff -> {
-            for (var passenger : entity.getPassengers()) {
-                writeEntities(buff, passenger);
-            }
-        }));
+        buffer.write(VAR_INT, entity.getPassengers().length);
+        for(var passenger : entity.getPassengers()) {
+            writeEntities(buffer, passenger);
+        }
 
         buffer.write(NBT, entity.getData());
     }

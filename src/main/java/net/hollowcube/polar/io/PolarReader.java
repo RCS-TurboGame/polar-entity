@@ -1,7 +1,7 @@
 package net.hollowcube.polar.io;
 
 import com.github.luben.zstd.Zstd;
-import net.hollowcube.polar.*;
+import net.hollowcube.polar.PolarDataConverter;
 import net.hollowcube.polar.chunk.*;
 import net.hollowcube.polar.chunk.PolarSection.LightContent;
 import net.kyori.adventure.nbt.BinaryTag;
@@ -75,11 +75,11 @@ public class PolarReader {
         var chunkX = buffer.read(VAR_INT);
         var chunkZ = buffer.read(VAR_INT);
 
-        var entities = new PolarEntity[sectionCount];
-
         var sections = new PolarSection[sectionCount];
+        var entities = new PolarEntity[sectionCount];
         for (int i = 0; i < sectionCount; i++) {
             sections[i] = readSection(dataConverter, version, dataVersion, buffer);
+            entities[i] = readEntity(buffer);
         }
 
         int blockEntityCount = buffer.read(VAR_INT);
@@ -181,6 +181,32 @@ public class PolarReader {
                 biomePalette, biomeData,
                 blockLightContent, blockLight,
                 skyLightContent, skyLight
+        );
+    }
+
+    private static @NotNull PolarEntity readEntity(@NotNull NetworkBuffer buffer) {
+        if (buffer.read(BOOLEAN)) return new PolarEntity();
+
+        final var position = buffer.read(DOUBLE.list());
+        final var rotation = buffer.read(FLOAT.list());
+
+        final java.util.UUID uuid = buffer.read(UUID);
+        final var type = buffer.read(STRING);
+        final var passengerCount = buffer.read(VAR_INT);
+
+        final var passengers = new PolarEntity[passengerCount];
+
+        for(int i = 0; i < passengerCount; i++) {
+            passengers[i] = readEntity(buffer);
+        }
+
+        return new PolarEntity(
+                new double[]{position.get(0), position.get(1), position.get(2)},
+                new float[]{rotation.get(0), rotation.get(1)},
+                uuid,
+                type,
+                passengers,
+                buffer.read(NBT)
         );
     }
 
