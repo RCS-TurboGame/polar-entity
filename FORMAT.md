@@ -57,15 +57,16 @@ The polar format resembles the anvil format in many ways, though it is binary, n
 
 ### Entity
 
-| Name        | Type                     | Notes                                         |
-|-------------|--------------------------|-----------------------------------------------|
-| Is Empty    | bool                     |                                               |
-| Position    | array[double]            | Index: `0` = X; `1` = Y; `2` = Z              |
-| Rotation    | array[float]             | Index: `0` = Yaw; `1` = Pitch                 |
-| Entity UUID | uuid                     |                                               |
-| Entity Type | string                   | Entity Key (for example: `minecraft:creeper`) |
-| Passengers  | array[[entity](#entity)] |                                               |
-| Extra Data  | nbt                      |                                               |
+| Name                 | Type                     | Notes                                         |
+|----------------------|--------------------------|-----------------------------------------------|
+| Is Empty             | bool                     |                                               |
+| Position             | array[double]            | Index: `0` = X; `1` = Y; `2` = Z              |
+| Rotation             | array[float]             | Index: `0` = Yaw; `1` = Pitch                 |
+| Entity UUID          | uuid                     |                                               |
+| Entity Type          | string                   | Entity Key (for example: `minecraft:creeper`) |
+| Number of Passengers | varint                   | Number of entries in the following array      |
+| Passengers           | array[[entity](#entity)] |                                               |
+| Extra Data           | nbt                      |                                               |
 
 ### Block Entity
 
