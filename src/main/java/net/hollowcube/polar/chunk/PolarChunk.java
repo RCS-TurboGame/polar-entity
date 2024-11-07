@@ -14,6 +14,7 @@ public record PolarChunk(
         int x,
         int z,
         PolarSection[] sections,
+        PolarEntity[] entities,
         List<BlockEntity> blockEntities,
         int[][] heightmaps,
         byte[] userData
