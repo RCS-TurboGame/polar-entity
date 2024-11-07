@@ -19,7 +19,7 @@ import static net.minestom.server.instance.Chunk.CHUNK_SECTION_SIZE;
 @SuppressWarnings("UnstableApiUsage")
 public class PolarWorld {
     public static final int MAGIC_NUMBER = 0x506F6C72; // `Polr`
-    public static final short LATEST_VERSION = 7;
+    public static final short LATEST_VERSION = 8;
 
     public static final short VERSION_UNIFIED_LIGHT = 1;
     public static final short VERSION_USERDATA_OPT_BLOCK_ENT_NBT = 2;
