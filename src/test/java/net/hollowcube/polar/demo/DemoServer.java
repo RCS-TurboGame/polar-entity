@@ -1,7 +1,8 @@
 package net.hollowcube.polar.demo;
 
-import net.hollowcube.polar.io.PolarLoader;
 import net.hollowcube.polar.chunk.PolarWorld;
+import net.hollowcube.polar.io.AnvilPolar;
+import net.hollowcube.polar.io.PolarLoader;
 import net.hollowcube.polar.io.PolarWriter;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.builder.Command;
@@ -12,11 +13,17 @@ import net.minestom.server.event.player.AsyncPlayerConfigurationEvent;
 import net.minestom.server.event.player.PlayerChatEvent;
 import net.minestom.server.event.player.PlayerSpawnEvent;
 import net.minestom.server.instance.InstanceContainer;
+import net.minestom.server.instance.block.BlockHandler;
+import net.minestom.server.tag.Tag;
+import net.minestom.server.utils.NamespaceID;
+import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 public class DemoServer {
     public static void main(String[] args) throws Exception {
@@ -31,16 +38,22 @@ public class DemoServer {
         var instance = MinecraftServer.getInstanceManager().createInstanceContainer();
 
         // Unlit
-        instance.setChunkLoader(new PolarLoader(Path.of("./src/test/resources/bench_1205.polar")));
+//        instance.setChunkLoader(new PolarLoader(Path.of("./src/test/resources/bench_1205.polar")));
         // Lit
 //        instance.setChunkSupplier(LightingChunk::new);
 //        instance.setChunkLoader(new PolarLoader(Path.of("./hcspawn.polar")));
 
+        MinecraftServer.getBlockManager().registerHandler("minecraft:sign", SignHandler::new);
+
+        // Entity Test (from @Turboman3000)
+        instance.setChunkLoader(new PolarLoader(AnvilPolar.anvilToPolar(Path.of("./src/test/resources/entity_test"))));
+instance.setTime(6000);
+instance.setTimeRate(0);
 
         MinecraftServer.getGlobalEventHandler()
                 .addListener(AsyncPlayerConfigurationEvent.class, event -> {
                     event.setSpawningInstance(instance);
-                    event.getPlayer().setRespawnPoint(new Pos(0, 40, 0, 90, 0));
+                    event.getPlayer().setRespawnPoint(new Pos(0, -50, 0, 90, 0));
                 })
                 .addListener(PlayerSpawnEvent.class, event -> {
                     event.getPlayer().setGameMode(GameMode.CREATIVE);
@@ -86,5 +99,20 @@ public class DemoServer {
         MinecraftServer.getCommandManager().register(lightCommand);
 
         server.start("0.0.0.0", 25565);
+    }
+
+    static class SignHandler implements BlockHandler {
+        @Override
+        public @NotNull NamespaceID getNamespaceId() {
+            return NamespaceID.from("minecraft", "sign");
+        }
+
+        @Override
+        public @NotNull Collection<Tag<?>> getBlockEntityTags() {
+            return List.of(
+                    Tag.NBT("front_text"),
+                    Tag.NBT("back_text")
+            );
+        }
     }
 }
