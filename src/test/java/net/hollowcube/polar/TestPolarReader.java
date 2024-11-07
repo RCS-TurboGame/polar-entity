@@ -1,6 +1,7 @@
 package net.hollowcube.polar;
 
 import net.hollowcube.polar.chunk.PolarChunk;
+import net.hollowcube.polar.chunk.PolarEntity;
 import net.hollowcube.polar.chunk.PolarSection;
 import net.hollowcube.polar.chunk.PolarWorld;
 import net.hollowcube.polar.io.PolarReader;
@@ -44,7 +45,7 @@ class TestPolarReader {
         for (int i = 0; i < PolarChunk.HEIGHTMAP_SIZE; i++) {
             heightmaps[0][i] = i;
         }
-        world.updateChunkAt(0, 0, new PolarChunk(0, 0, emptySections, List.of(), heightmaps, new byte[0]));
+        world.updateChunkAt(0, 0, new PolarChunk(0, 0, emptySections, new PolarEntity[0], List.of(), heightmaps, new byte[0]));
 
         var raw = PolarWriter.write(world);
         var newWorld = PolarReader.read(raw);

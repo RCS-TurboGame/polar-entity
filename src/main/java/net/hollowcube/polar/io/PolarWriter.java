@@ -1,17 +1,15 @@
 package net.hollowcube.polar.io;
 
 import com.github.luben.zstd.Zstd;
-import net.hollowcube.polar.*;
-import net.hollowcube.polar.chunk.PaletteUtil;
-import net.hollowcube.polar.chunk.PolarChunk;
-import net.hollowcube.polar.chunk.PolarSection;
-import net.hollowcube.polar.chunk.PolarWorld;
+import net.hollowcube.polar.PolarDataConverter;
+import net.hollowcube.polar.chunk.*;
 import net.minestom.server.coordinate.CoordConversion;
 import net.minestom.server.instance.Chunk;
 import net.minestom.server.network.NetworkBuffer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static net.minestom.server.network.NetworkBuffer.*;
 
@@ -66,6 +64,10 @@ public class PolarWriter {
             writeSection(buffer, section);
         }
 
+        for (var entity : chunk.entities()) {
+            writeEntities(buffer, entity);
+        }
+
         buffer.write(VAR_INT, chunk.blockEntities().size());
         for (var blockEntity : chunk.blockEntities()) {
             writeBlockEntity(buffer, blockEntity);
@@ -89,6 +91,33 @@ public class PolarWriter {
         }
 
         buffer.write(BYTE_ARRAY, chunk.userData());
+    }
+
+    private static void writeEntities(@NotNull NetworkBuffer buffer, @NotNull PolarEntity entity) {
+        buffer.write(BOOLEAN, entity.isEmpty());
+        if (entity.isEmpty()) return;
+
+        buffer.write(DOUBLE.list(), List.of(
+                entity.getPosition()[0],
+                entity.getPosition()[1],
+                entity.getPosition()[2]
+        ));
+
+        buffer.write(FLOAT.list(), List.of(
+                entity.getRotation()[0],
+                entity.getRotation()[1]
+        ));
+
+        buffer.write(UUID, entity.getUuid());
+        buffer.write(STRING, entity.getType());
+
+        buffer.write(BYTE_ARRAY, NetworkBuffer.makeArray(buff -> {
+            for (var passenger : entity.getPassengers()) {
+                writeEntities(buff, passenger);
+            }
+        }));
+
+        buffer.write(NBT, entity.getData());
     }
 
     private static void writeSection(@NotNull NetworkBuffer buffer, @NotNull PolarSection section) {

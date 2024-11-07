@@ -1,21 +1,18 @@
 package net.hollowcube.polar;
 
 import net.hollowcube.polar.chunk.PolarChunk;
+import net.hollowcube.polar.chunk.PolarEntity;
 import net.hollowcube.polar.chunk.PolarSection;
 import net.hollowcube.polar.chunk.PolarWorld;
 import net.hollowcube.polar.io.PolarLoader;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.instance.InstanceContainer;
-import net.minestom.server.network.NetworkBuffer;
 import net.minestom.server.world.DimensionType;
 import org.junit.jupiter.api.Test;
 
-import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestUserDataWriteRead {
 
@@ -31,7 +28,7 @@ class TestUserDataWriteRead {
         Arrays.fill(emptySections, new PolarSection());
 
         var heightmaps = new int[PolarChunk.MAX_HEIGHTMAPS][];
-        world.updateChunkAt(0, 0, new PolarChunk(0, 0, emptySections, List.of(), heightmaps, new byte[0]));
+        world.updateChunkAt(0, 0, new PolarChunk(0, 0, emptySections, new PolarEntity[0], List.of(), heightmaps, new byte[0]));
 
         var wa = new UpdateTimeWorldAccess();
         var loader = new PolarLoader(world).setWorldAccess(wa);

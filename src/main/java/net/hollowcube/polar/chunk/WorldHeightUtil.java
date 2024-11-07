@@ -36,6 +36,7 @@ public class WorldHeightUtil {
                 chunk.x(),
                 chunk.z(),
                 sections,
+                chunk.entities(),
                 chunk.blockEntities(),
                 chunk.heightmaps(),
                 chunk.userData()

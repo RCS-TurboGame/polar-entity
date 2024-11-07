@@ -3,6 +3,7 @@ package net.hollowcube.polar.io;
 import it.unimi.dsi.fastutil.shorts.Short2ObjectMap;
 import it.unimi.dsi.fastutil.shorts.Short2ObjectOpenHashMap;
 import net.hollowcube.polar.chunk.PolarChunk;
+import net.hollowcube.polar.chunk.PolarEntity;
 import net.hollowcube.polar.chunk.PolarSection;
 import net.hollowcube.polar.chunk.PolarSection.LightContent;
 import net.hollowcube.polar.chunk.PolarWorld;
@@ -408,6 +409,7 @@ public class PolarLoader implements IChunkLoader {
                         chunk.getChunkX(),
                         chunk.getChunkZ(),
                         sections,
+                        new PolarEntity[0],
                         blockEntities,
                         heightmaps,
                         userData

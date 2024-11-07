@@ -2,11 +2,8 @@ package net.hollowcube.polar.io;
 
 import com.github.luben.zstd.Zstd;
 import net.hollowcube.polar.*;
-import net.hollowcube.polar.chunk.PaletteUtil;
-import net.hollowcube.polar.chunk.PolarChunk;
-import net.hollowcube.polar.chunk.PolarSection;
+import net.hollowcube.polar.chunk.*;
 import net.hollowcube.polar.chunk.PolarSection.LightContent;
-import net.hollowcube.polar.chunk.PolarWorld;
 import net.kyori.adventure.nbt.BinaryTag;
 import net.kyori.adventure.nbt.CompoundBinaryTag;
 import net.minestom.server.coordinate.CoordConversion;
@@ -78,6 +75,8 @@ public class PolarReader {
         var chunkX = buffer.read(VAR_INT);
         var chunkZ = buffer.read(VAR_INT);
 
+        var entities = new PolarEntity[sectionCount];
+
         var sections = new PolarSection[sectionCount];
         for (int i = 0; i < sectionCount; i++) {
             sections[i] = readSection(dataConverter, version, dataVersion, buffer);
@@ -113,6 +112,7 @@ public class PolarReader {
         return new PolarChunk(
                 chunkX, chunkZ,
                 sections,
+                entities,
                 blockEntities,
                 heightmaps,
                 userData
