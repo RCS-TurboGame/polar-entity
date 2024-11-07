@@ -24,8 +24,6 @@ The polar format resembles the anvil format in many ways, though it is binary, n
 
 ### Chunk
 
-Entities or some other extra data field needs to be added to chunks in the future.
-
 | Name                     | Type                                 | Notes                                                                                |
 |--------------------------|--------------------------------------|--------------------------------------------------------------------------------------|
 | Chunk X                  | varint                               |                                                                                      |
